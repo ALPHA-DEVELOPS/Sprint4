@@ -44,3 +44,9 @@ div .addProduct{
 .formulario{
     margin-top: 55px;
 }
+div .addProduct button {
+    margin-right: 30px;
+}
+span .TitleRol{
+    font-size: 27px;
+}

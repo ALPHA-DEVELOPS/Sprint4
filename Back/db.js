@@ -23,6 +23,14 @@ export async function actualizar(id){
     return iddb
     
 }
+export async function listarProductos(){ 
+    let prods = await modeloProductos.find()
+    return prods
+}
+export async function listarVentas(){ 
+    let ventas = await modeloVentas.find()
+    return ventas
+}
 
 export async function modificar(datosMod){
     let idmodif = datosMod.id

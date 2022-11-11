@@ -2,7 +2,7 @@ import Express, { response } from "express";
 import './db.js'
 import cors from 'cors' 
 import path from "path";
-import { actualizar, modificar } from "./db.js";
+import { actualizar, modificar, listarProductos, listarVentas } from "./db.js";
 const app = Express()
 const dirBack = path.resolve() 
 const dirFront = path.join(dirBack, "../Frontend") 
@@ -27,7 +27,21 @@ app.post('/modificar', function(pet, res){
     console.log(datosMod)
     let idmodif = modificar(datosMod)
     .then(datosMod => res.send(datosMod))
-    .catch(err => res.send({err}))
 })
+
+app.get('/qprods', function(pet, res){
+
+    let produc = listarProductos()    
+    .then(produc => res.send(produc))
+    .catch(err=>console.error(err))
+})
+app.get('/qventas', function(pet, res){
+
+    let ventas = listarVentas()    
+    .then(ventas => res.send(ventas))
+    .catch(err=>console.error(err))
+})
+
+
 
 

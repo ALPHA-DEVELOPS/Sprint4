@@ -13,7 +13,7 @@ function AdminIndex() {
         <>
             <div>
                 <div className="indexAdmin">
-                    <span>Administrador</span>
+                    <span className="TitleRol">Administrador</span>
                     <ListGroup variant="flush">
                         <ListGroup.Item onClick={() => setEstadoAdmin(<AddProduct/>)}>Agregar producto</ListGroup.Item>
                         <ListGroup.Item onClick={() => setEstadoAdmin(<ListProducts/>)}>Listar producto</ListGroup.Item>

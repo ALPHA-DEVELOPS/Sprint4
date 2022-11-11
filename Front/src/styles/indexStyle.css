@@ -11,3 +11,9 @@ div .nav-link{
 nav {
     background-color: #293241;
 }
+
+.Inicio{
+    width: 40%;
+    margin: auto;
+    margin-top: 100px;
+}
