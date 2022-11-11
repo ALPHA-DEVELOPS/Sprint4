@@ -2,6 +2,24 @@ import React from "react";
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 function ChangeProd() {
+
+    function ModificarDatos(){
+        let datosMod = {
+            id: document.getElementById("id").value,
+            nombre: document.getElementById("nombre").value,
+            cantidad: document.getElementById("cantidad").value,
+            precio: document.getElementById("precio").value,
+        
+        } 
+        fetch('http://localhost:5000/modificar', {
+                method: 'post',
+                headers: {'Content-Type':'application/json'},
+                body:JSON.stringify(datosMod)
+            })
+            .then((res) => res.json())
+            .then((dato) => alert("Datos modificados", dato))
+            .catch((err) => alert("Error: ", err))
+    }
     function  ConsultarDatos(){
         let datos = {
             id: document.getElementById("id").value,
@@ -12,22 +30,38 @@ function ChangeProd() {
                 body:JSON.stringify(datos)
             })
             .then(res => res.json())
-            .then(data => showData(data))
+            .then(data => {
+                if(data.prodName !== undefined){
+                    showData(data)
+                    enableInputs(false)
+                }
+                else{
+                    let data = {prodName:"",stock:"",prodValue:""}
+                    showData(data)
+                    enableInputs(true)
+                    setTimeout(() => {
+                        alert("El producto no existe")
+                    }, "300");
+                }
+            })
             .catch(err => {
             let data = {prodName:"",stock:"",prodValue:""}
             showData(data)
-            alert("Usuario no existe")
+            alert("Producto no existe")
         })
         }
         function showData(data){
             document.getElementById('nombre').value = data.prodName
             document.getElementById('cantidad').value = data.stock
             document.getElementById('precio').value = data.prodValue
-            document.getElementById('nombre').disabled = false
-            document.getElementById('cantidad').disabled = false
-            document.getElementById('precio').disabled = false
-            document.getElementById('changeButton').disabled = false
+
             
+        }
+        function enableInputs(valor){
+            document.getElementById('nombre').disabled = valor
+            document.getElementById('cantidad').disabled = valor
+            document.getElementById('precio').disabled = valor
+            document.getElementById('changeButton').disabled = valor
         }
     return (
         <div className="addProduct">
@@ -51,10 +85,10 @@ function ChangeProd() {
                     <Form.Label>Precio</Form.Label>
                     <Form.Control id="precio" type="text" placeholder="Precio" disabled/>
                 </Form.Group>
-                <Button type="button" onClick={ConsultarDatos} variant="primary" >
+                <Button type="button" onClick={ConsultarDatos} variant="primary">
                     Consultar
                 </Button>
-                <Button id="changeButton"variant="primary"disabled>
+                <Button type="button" onClick={ModificarDatos} id="changeButton"variant="primary" >
                     Modificar
                 </Button>
             </Form>

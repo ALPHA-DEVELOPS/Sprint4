@@ -10,10 +10,31 @@ const esquema = mongoose.Schema({
     prodValue:Number,
     stock:Number
 })
+const esquemaVentas = mongoose.Schema({
+    prodName:String,
+    prodValue:Number,
+    stock:Number
+})
 const modeloProductos = mongoose.model('productos',esquema)
+const modeloVentas = mongoose.model('ventas',esquema)
 export async function actualizar(id){
     let iddb = await modeloProductos.findOne({_id:id})
+    console.log(iddb)
     return iddb
     
 }
+
+export async function modificar(datosMod){
+    let idmodif = datosMod.id
+        let documento = await modeloProductos.updateOne({_id:idmodif},{
+            $set:{
+                prodName: datosMod.nombre,
+                prodValue: datosMod.precio,
+                stock: datosMod.cantidad
+            }
+        })
+        console.log(documento)
+    return idmodif
+}
+
 
