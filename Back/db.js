@@ -15,8 +15,20 @@ const esquemaVentas = mongoose.Schema({
     prodValue:Number,
     stock:Number
 })
+const esquemaUserProds = mongoose.Schema({
+    producto:String,
+    valor:Number,
+    cantidad:Number
+})
+const esquemaCarrito = mongoose.Schema({
+    producto:String,
+    valor:Number,
+    cantidad:Number
+})
 const modeloProductos = mongoose.model('productos',esquema)
-const modeloVentas = mongoose.model('ventas',esquema)
+const modeloVentas = mongoose.model('ventas',esquemaVentas)
+const modeloCarrito = mongoose.model('carritos',esquemaCarrito)
+const modeloUserProds = mongoose.model('userproductos',esquemaUserProds)
 export async function actualizar(id){
     let iddb = await modeloProductos.findOne({_id:id})
     console.log(iddb)
@@ -30,6 +42,19 @@ export async function listarProductos(){
 export async function listarVentas(){ 
     let ventas = await modeloVentas.find()
     return ventas
+}
+export async function carrito(){ 
+    let carritoprods = await modeloCarrito.find()
+    return carritoprods
+}
+export async function UserProds(){ 
+    let userprods = await modeloUserProds.find()
+    return userprods
+}
+export async function eliminarprod(idprodjson){ 
+    let idprod = idprodjson.prodid
+    let prodeliminar = await modeloCarrito.deleteOne({_id:idprod})
+    return prodeliminar
 }
 
 export async function modificar(datosMod){

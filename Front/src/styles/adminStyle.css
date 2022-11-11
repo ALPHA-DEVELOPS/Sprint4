@@ -47,6 +47,8 @@ div .addProduct{
 div .addProduct button {
     margin-right: 30px;
 }
-span .TitleRol{
-    font-size: 27px;
+div .indexAdmin .TitleRol{
+    font-size: 35px;
+    border-bottom: 1px solid;
+    min-width: 500px;
 }

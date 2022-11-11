@@ -3,6 +3,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Inicio from './inicio'
 import AdminIndex from './admin/adminIndex';
+import UserIndex from './usuario/userIndex';
 import { useState } from 'react';
 import '../styles/indexStyle.css'
 function NavBar() {
@@ -15,7 +16,7 @@ function NavBar() {
         setEstadoInicio(<AdminIndex/>)
     }
     function showUser(){
-        setEstadoInicio(<AdminIndex/>)
+        setEstadoInicio(<UserIndex/>)
     }
   return (
     <>

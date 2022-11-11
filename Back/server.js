@@ -2,7 +2,7 @@ import Express, { response } from "express";
 import './db.js'
 import cors from 'cors' 
 import path from "path";
-import { actualizar, modificar, listarProductos, listarVentas } from "./db.js";
+import { actualizar, modificar, listarProductos, listarVentas, carrito, UserProds, eliminarprod } from "./db.js";
 const app = Express()
 const dirBack = path.resolve() 
 const dirFront = path.join(dirBack, "../Frontend") 
@@ -28,7 +28,12 @@ app.post('/modificar', function(pet, res){
     let idmodif = modificar(datosMod)
     .then(datosMod => res.send(datosMod))
 })
-
+app.delete('/eliminar', function(pet, res){
+    let prodeliminar = pet.body
+    let eliminar = eliminarprod(prodeliminar)
+    .then(prodeliminar => res.send(prodeliminar))
+    .catch(err=>console.error(err))
+})
 app.get('/qprods', function(pet, res){
 
     let produc = listarProductos()    
@@ -36,12 +41,20 @@ app.get('/qprods', function(pet, res){
     .catch(err=>console.error(err))
 })
 app.get('/qventas', function(pet, res){
-
+    
     let ventas = listarVentas()    
     .then(ventas => res.send(ventas))
     .catch(err=>console.error(err))
 })
 
-
-
-
+app.get('/userprods', function(pet, res){
+    
+    let userproducts = UserProds()    
+    .then(userproducts => res.send(userproducts))
+    .catch(err=>console.error(err))
+})
+app.get('/carrito', function(pet, res){
+    let prodCarrito = carrito()
+    .then(prodCarrito => res.send(prodCarrito))
+    .catch(err=>console.error(err))
+})
