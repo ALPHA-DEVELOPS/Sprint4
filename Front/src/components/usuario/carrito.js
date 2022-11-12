@@ -76,6 +76,7 @@ function Carrito() {
                         </tr>
                     </tbody>
                 </Table>
+                <Button onClick={()=> alert("Compra realizada")} variant='success'>Comprar</Button>
             </div>
         </div>
     )

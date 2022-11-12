@@ -15,7 +15,7 @@ function ListVentas(){
         <div className="addProduct">
 
         <h1>
-            Listar productos
+            Listar Ventas
         </h1>
         <div>
         <Table striped bordered hover>
