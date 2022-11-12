@@ -86,7 +86,7 @@ function ChangeProd() {
                     <Form.Label>Precio</Form.Label>
                     <Form.Control id="precio" type="text" placeholder="Precio" disabled />
                 </Form.Group>
-                <Button className="botonConsultar" type="button" onClick={ConsultarDatos} variant="primary">
+                <Button className="botonConsultar" type="button" onClick={ConsultarDatos } variant="primary">
                     Consultar
                 </Button>
                 <Button className="botonConsultar" type="button" onClick={ModificarDatos} id="changeButton" variant="primary" >

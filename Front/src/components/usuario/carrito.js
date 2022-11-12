@@ -3,27 +3,28 @@ import { useState } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 function Carrito() {
+    var acum = 0
 
-
-    async function eliminarProdCarrito(idprod){
-        let idprodjson = {prodid:idprod}
-        fetch('http://localhost:5000/eliminar',{
-        method: 'DELETE',
-        headers: {'Content-Type': 'application/json'},
-        body:JSON.stringify(idprodjson)
-    })
-    .then(res => console.log("exito"))
-}
+    function eliminarProdCarrito(idprod) {
+        let idprodjson = { prodid: idprod }
+        fetch('http://localhost:5000/eliminar', {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(idprodjson)
+        })
+            .then(res => console.log("exito"))
+    }
     const [estadoCarrito, setEstadoCarrito] = useState([])
 
-    fetch('http://localhost:5000/carrito', {
-        method: 'get',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify()
-    })
-    .then((res) => res.json())
-    .then(carritoprods => { setEstadoCarrito(carritoprods) })
-   
+        fetch('http://localhost:5000/carrito', {
+           method: 'get',
+           headers: { 'Content-Type': 'application/json' },
+           body: JSON.stringify()
+        })
+        .then((res) => res.json())
+        .then(carritoprods => { setEstadoCarrito(carritoprods) })
+
+
     return (
         <div className="addProduct">
 
@@ -36,8 +37,8 @@ function Carrito() {
                         <tr>
                             <th>ID</th>
                             <th>Producto</th>
-                            <th>Valor</th>
                             <th>Cantidad</th>
+                            <th>Valor</th>
                         </tr>
                     </thead>
                     <tbody id="rowprod">
@@ -50,14 +51,29 @@ function Carrito() {
                                     <tr key={index}>
                                         <td id={index}>{item._id}</td>
                                         <td>{item.producto}</td>
-                                        <td>{item.valor}</td>
                                         <td>{item.cantidad}</td>
-                                        <td><Button onClick={()=> eliminarProdCarrito(item._id)} variant="danger">X</Button></td>
+                                        <td>{item.valor}</td>
+                                        <td><Button onClick={() => eliminarProdCarrito(item._id)} variant="danger">X</Button></td>
                                     </tr>
                                 )
                             }
                             )
                         }
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>{estadoCarrito.map((elem, ind) => {
+                                acum += elem.valor
+                                if(ind+1 === estadoCarrito.length){
+                                    return acum
+                                }
+                            })
+                            }
+                                
+                            </td>
+                            <td><b>Total</b></td>
+                        </tr>
                     </tbody>
                 </Table>
             </div>

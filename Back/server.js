@@ -2,7 +2,7 @@ import Express, { response } from "express";
 import './db.js'
 import cors from 'cors' 
 import path from "path";
-import { actualizar, modificar, listarProductos, listarVentas, carrito, UserProds, eliminarprod } from "./db.js";
+import { actualizar, modificar, listarProductos, listarVentas, carrito, UserProds, eliminarprod, agregar,agregarprodcar } from "./db.js";
 const app = Express()
 const dirBack = path.resolve() 
 const dirFront = path.join(dirBack, "../Frontend") 
@@ -28,6 +28,21 @@ app.post('/modificar', function(pet, res){
     let idmodif = modificar(datosMod)
     .then(datosMod => res.send(datosMod))
 })
+app.post('/agregar', function(pet, res){
+    let datosadd = pet.body
+    console.log(datosadd)
+    let idmodif = agregar(datosadd)
+    .then(datosadd => res.send(datosadd))
+    .catch(err => console.error(err))
+})
+app.post('/addprodscar', function(pet, res){
+    let datosaddcar = pet.body
+    console.log(datosaddcar)
+    let idmodif = agregarprodcar(datosaddcar)
+    .then(datosaddcar => res.send(datosaddcar))
+    .catch(err => console.error(err))
+})
+
 app.delete('/eliminar', function(pet, res){
     let prodeliminar = pet.body
     let eliminar = eliminarprod(prodeliminar)

@@ -1,6 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import Table from 'react-bootstrap/Table';
+import Button from 'react-bootstrap/Button';
+
 function ListProductsUser() {
     const [estadoProd, setEstadoProd] = useState([])
 
@@ -11,6 +13,16 @@ function ListProductsUser() {
     })
         .then((res) => res.json())
         .then(produc => { setEstadoProd(produc) })
+
+    function addprodcarrito(item){
+        fetch('http://localhost:5000/addprodscar',{
+            method: 'post',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify(item)
+        })
+        .then((res)=> console.log("exito"))
+        .then(err=> console.error("Fallo"))
+    }
     return (
         <div className="addProduct">
 
@@ -30,15 +42,16 @@ function ListProductsUser() {
                     <tbody>
 
                         {
-                            estadoProd.map(item => {
+                            estadoProd.map((item, index) => {
 
                                 return (
 
-                                    <tr key={item._id}>
+                                    <tr key={index}>
                                         <td>{item._id}</td>
                                         <td>{item.producto}</td>
                                         <td>{item.valor}</td>
                                         <td>{item.cantidad}</td>
+                                        <td><Button onClick={()=> addprodcarrito(item)} variant="success">➕</Button></td>
                                     </tr>
                                 )
                             }
