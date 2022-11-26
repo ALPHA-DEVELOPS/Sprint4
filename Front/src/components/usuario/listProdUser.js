@@ -2,7 +2,7 @@ import React from "react";
 import { useState } from "react";
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
-
+import '../../styles/userStyle.css'
 function ListProductsUser() {
     const [estadoProd, setEstadoProd] = useState([])
 
@@ -30,35 +30,21 @@ function ListProductsUser() {
                 Listar productos
             </h1>
             <div>
-                <Table striped bordered hover>
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Producto</th>
-                            <th>Valor</th>
-                            <th>Cantidad</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-                        {
+            {
                             estadoProd.map((item, index) => {
 
                                 return (
-
-                                    <tr key={index}>
-                                        <td>{item._id}</td>
-                                        <td>{item.producto}</td>
-                                        <td>{item.valor}</td>
-                                        <td>{item.cantidad}</td>
-                                        <td><Button onClick={()=> addprodcarrito(item)} variant="success">➕</Button></td>
-                                    </tr>
+                                    <div className="productoVisual">
+                                        <img src={item.img}></img>
+                                        <h5>Nombre: {item.prodName}</h5>
+                                        <h6>Precio: {item.prodValue}</h6>
+                                        <h6>Cantidad: {item.stock}</h6>
+                                        <p><Button onClick={()=> addprodcarrito(item)} variant="success">➕</Button></p>
+                                    </div>
                                 )
                             }
                             )
                         }
-                    </tbody>
-                </Table>
             </div>
         </div>
     )

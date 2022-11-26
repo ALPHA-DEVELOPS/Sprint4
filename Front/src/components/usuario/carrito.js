@@ -14,6 +14,15 @@ function Carrito() {
         })
             .then(res => console.log("exito"))
     }
+    function compraCarrito(){
+        fetch('http://localhost:5000/addVentas',{
+            method: 'post',
+            headers:{'Content-Type':'application/json'},
+            body: JSON.stringify()
+        })
+        .then((res)=> console.log("exito"))
+        .then(err=> console.error("Fallo"))
+    }
     const [estadoCarrito, setEstadoCarrito] = useState([])
 
         fetch('http://localhost:5000/carrito', {
@@ -23,7 +32,6 @@ function Carrito() {
         })
         .then((res) => res.json())
         .then(carritoprods => { setEstadoCarrito(carritoprods) })
-
 
     return (
         <div className="addProduct">
@@ -76,7 +84,7 @@ function Carrito() {
                         </tr>
                     </tbody>
                 </Table>
-                <Button onClick={()=> alert("Compra realizada")} variant='success'>Comprar</Button>
+                <Button onClick={()=> compraCarrito()} variant='success'>Comprar</Button>
             </div>
         </div>
     )

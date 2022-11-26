@@ -1,10 +1,9 @@
 import './App.css';
-import TypesExample from './components/componenteBase';
-import NavBar from './components/NavBar'
+import Inicio from './components/inicio'
 function App() {
   return (
     <div className="App">
-      <NavBar/>
+      <Inicio/>
     </div>
   );
 }

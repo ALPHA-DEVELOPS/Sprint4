@@ -22,12 +22,9 @@ function ListVentas(){
       <thead>
         <tr>
           <th>ID</th>
-          <th>Usuario</th>
           <th>Producto</th>
           <th>Valor</th>
           <th>Cantidad</th>
-          <th>Fecha</th>
-
         </tr>
       </thead>
       <tbody>
@@ -39,12 +36,11 @@ function ListVentas(){
                         
                         
                         <tr key={item._id}>
-                            <td>{item.IdVenta}</td>
-                            <td>{item.IdCliente}</td>
-                            <td>{item.Producto}</td>
-                            <td>{item.Valor}</td>
-                            <td>{item.Cantidad}</td>
-                            <td>{item.Fecha}</td>
+                            <td>{item._id}</td>
+                            <td>{item.producto}</td>
+                            <td>{item.valor}</td>
+                            <td>{item.cantidad}</td>
+
                         </tr>
         
 
